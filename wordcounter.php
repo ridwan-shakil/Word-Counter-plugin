@@ -3,7 +3,7 @@
  * Plugin Name:       Word Counter
  * Plugin URI:        https://github.com/ridwan-shakil/Word-Counter-plugin.git
  * Description:       Counts the number of words in a content.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            MD.Ridwan
