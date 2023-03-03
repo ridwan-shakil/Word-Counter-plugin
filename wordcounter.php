@@ -17,22 +17,58 @@
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
-// function wordcounter_activation_hook(){
-// };
-// register_activation_hook(__FILE__, 'wordcounter_activation_hook');
-
+// Showing how many words the content has 
 function wordcounter_count_words($content) {
 	$striped_content = strip_tags($content);
 	$total_words = str_word_count($striped_content);
 	$label = __('Total words ', 'word-counter');
 	$tag = 'h5';
-	// filters that can be used to change the value of label and tag
+	// apply filters that can be used to change the value of label and tag
 	$label = apply_filters('word_counter_label', $label);
 	$tag = apply_filters('word_counter_tag', $tag);
-
-	// $content .= $lebel . $total_words;
-	$content .= sprintf('<%s> %s : %s </%s>', $tag, $label, $total_words, $tag);
+	$content = sprintf('<%s> %s : %s </%s>', $tag, $label, $total_words, $tag) . $content;
 
 	return $content;
 }
-add_filter('the_content', 'wordcounter_count_words');
+add_filter('the_content', 'wordcounter_count_words', 20);
+
+
+// Showing Reading time 
+function wordcounter_reading_time($content) {
+	$striped_content = strip_tags($content);
+	$total_words = str_word_count($striped_content);
+	$reading_minute = floor($total_words / 200);
+	$reading_second = ceil($total_words % 200 / (200 / 60));
+	$label = 'Total Reading Time :';
+	$tag = 'h5';
+	// apply filters that can be used to change the value of label and tag
+	$label = apply_filters('wordcounter_reading_time_lable', $label);
+	$tag = apply_filters('wordcounter_reading_time_tag', $tag);
+
+	$content = sprintf('<%s> %s %s Minute %s second</%s> ', $tag, $label, $reading_minute, $reading_second, $tag) . $content;
+
+	return $content;
+}
+
+add_filter('the_content', 'wordcounter_reading_time', 10);
+
+
+
+
+
+// Testing 
+
+// function cng_wordcounter_reading_time_lable($label) {
+// 	$label = 'Time will take to read :';
+// 	return $label;
+// }
+
+// add_filter('wordcounter_reading_time_lable', 'cng_wordcounter_reading_time_lable');
+
+
+// function cng_wordcounter_reading_time_tag($tag) {
+// 	$tag = 'h5';
+// 	return $tag;
+// }
+
+// add_filter('wordcounter_reading_time_tag', 'cng_wordcounter_reading_time_tag');
