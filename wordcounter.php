@@ -10,7 +10,7 @@
  * Author URI:        https://github.com/ridwan-shakil
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Update URI:
+ * Update URI:		  https://github.com/ridwan-shakil/Word-Counter-plugin.git
  * Text Domain:       word-counter
  * Domain Path:       /languages
  */
