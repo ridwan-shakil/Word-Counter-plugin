@@ -10,25 +10,29 @@
  * Author URI:        https://github.com/ridwan-shakil
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Update URI:        
+ * Update URI:
  * Text Domain:       word-counter
  * Domain Path:       /languages
  */
 if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+	exit; // Exit if accessed directly
 }
 // function wordcounter_activation_hook(){
 // };
 // register_activation_hook(__FILE__, 'wordcounter_activation_hook');
 
-function wordcounter_count_words($content)
-{
-    $striped_content = strip_tags($content);
-    $total_words = str_word_count($striped_content);
-    $lebel = __('Total words: ', 'word-counter');
+function wordcounter_count_words($content) {
+	$striped_content = strip_tags($content);
+	$total_words = str_word_count($striped_content);
+	$label = __('Total words ', 'word-counter');
+	$tag = 'h5';
+	// filters that can be used to change the value of label and tag
+	$label = apply_filters('word_counter_label', $label);
+	$tag = apply_filters('word_counter_tag', $tag);
 
-    $content .= $lebel . $total_words;
+	// $content .= $lebel . $total_words;
+	$content .= sprintf('<%s> %s : %s </%s>', $tag, $label, $total_words, $tag);
 
-    return $content;
+	return $content;
 }
 add_filter('the_content', 'wordcounter_count_words');
